@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Studio Digital — Sites internet professionnels</title>
+  <meta name="description" content="Nous créons des sites internet modernes, élégants et adaptés à votre activité pour vous aider à développer votre présence en ligne et inspirer confiance à vos futurs clients.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23171717'/%3E%3Crect x='7' y='8' width='18' height='16' rx='2.5' stroke='%23E8DFD2' stroke-width='1.5' fill='none'/%3E%3Cpath d='M7 13.5h18' stroke='%23E8DFD2' stroke-width='1.5'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,620;1,9..144,560&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --ivory:#FAF9F6; --paper:#E8DFD2; --ink:#171717; --stone:#6E6A64; --line:#E5DED5; --muted:#D4CDC3; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--ivory); color:var(--ink); font-family:Outfit,sans-serif; line-height:1.6; }
+    img,svg { max-width:100%; }
+    a { color:inherit; }
+    h1,h2,h3,.display { font-family:Fraunces,Georgia,serif; font-weight:560; letter-spacing:-.03em; line-height:1.05; }
+    .wrap { width:min(1120px, calc(100% - 40px)); margin-inline:auto; }
+    .skip { position:absolute; left:12px; top:12px; transform:translateY(-140%); background:var(--ink); color:var(--ivory); padding:8px 12px; z-index:20; }
+    .skip:focus { transform:none; }
+    header { position:sticky; top:0; z-index:30; background:rgba(250,249,246,.92); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+    .bar { height:68px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .logo { display:flex; align-items:center; gap:10px; text-decoration:none; font-family:Fraunces,serif; font-size:1.2rem; }
+    .mark { width:28px; height:28px; border-radius:5px; background:var(--ink); color:var(--ivory); display:grid; place-items:center; font-size:.75rem; }
+    nav.desk { display:flex; gap:28px; }
+    nav.desk a { text-decoration:none; font-size:.95rem; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:48px; padding:0 18px; border-radius:6px; border:1px solid var(--ink); background:var(--ink); color:var(--ivory); text-decoration:none; font:inherit; cursor:pointer; }
+    .btn.ghost { background:transparent; color:var(--ink); }
+    .btn.light { background:var(--ivory); color:var(--ink); border-color:transparent; }
+    .btn.wide { width:100%; }
+    .burger { display:none; width:40px; height:40px; border:1px solid var(--line); background:transparent; border-radius:6px; }
+    #menu { display:none; border-top:1px solid var(--line); padding:8px 0 20px; }
+    #menu a, #menu button { display:block; width:100%; text-align:left; background:none; border:0; border-bottom:1px solid var(--line); padding:16px 0; font-family:Fraunces,serif; font-size:1.8rem; cursor:pointer; color:inherit; }
+    .hero { background:var(--paper); padding:72px 0 80px; }
+    .hero-grid { display:grid; grid-template-columns:1.08fr .92fr; gap:48px; align-items:center; }
+    .kicker { font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; font-weight:600; }
+    h1 { font-size:clamp(2.7rem, 6vw, 4.3rem); max-width:12ch; margin:18px 0; }
+    .lead { font-size:1.12rem; max-width:38rem; }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+    .fine { margin-top:22px; font-size:.95rem; }
+    .mock { position:relative; }
+    .win { background:var(--ivory); border:1px solid var(--line); border-radius:12px; padding:16px; box-shadow:0 28px 60px -40px rgba(23,23,23,.7); }
+    .win.back { width:90%; margin-left:auto; }
+    .win.front { width:88%; margin-top:-70px; position:relative; }
+    .dots { display:flex; gap:6px; align-items:center; color:var(--stone); font-size:.72rem; }
+    .dot { width:8px; height:8px; border-radius:99px; background:var(--line); }
+    .url { margin-left:8px; border:1px solid var(--line); border-radius:6px; padding:3px 8px; }
+    .lines span { display:block; height:8px; background:var(--paper); border-radius:99px; margin:8px 0; }
+    figcaption { color:var(--ink); font-size:.92rem; margin-top:14px; }
+    section { padding:96px 0; scroll-margin-top:84px; }
+    .paper { background:var(--paper); }
+    h2 { font-size:clamp(2.2rem, 4vw, 3.2rem); margin:12px 0 0; }
+    .intro { max-width:42rem; font-size:1.12rem; }
+    .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:40px; }
+    .card,.offer,.tile { background:var(--ivory); border:1px solid var(--line); border-radius:10px; }
+    .card { padding:28px; }
+    .card h3,.tile { font-size:1.5rem; }
+    .stone { color:var(--stone); }
+    .offers { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:40px; align-items:stretch; }
+    .offer { padding:32px; display:flex; flex-direction:column; }
+    .offer.premium { border-color:var(--ink); }
+    .top { display:flex; justify-content:space-between; gap:12px; align-items:center; }
+    .badge { border:1px solid var(--line); background:var(--paper); border-radius:99px; padding:4px 10px; font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; }
+    .price { font-size:4rem; margin:18px 0 0; }
+    .offer ul { padding:0; margin:24px 0; list-style:none; border-top:1px solid var(--line); padding-top:20px; }
+    .offer li { display:flex; gap:10px; margin:0 0 10px; }
+    .note { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:12px 14px; font-size:.92rem; }
+    table { width:100%; border-collapse:collapse; background:var(--ivory); min-width:640px; }
+    th,td { text-align:left; padding:14px 18px; border-bottom:1px solid var(--line); vertical-align:top; }
+    .scroll { overflow-x:auto; border:1px solid var(--line); border-radius:10px; margin-top:18px; }
+    .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; margin-top:36px; }
+    .steps article { border-top:1px solid var(--line); padding-top:16px; }
+    .num { font-family:Fraunces,serif; font-size:3rem; }
+    .jobs { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:32px; }
+    .tile { padding:18px; font-family:Outfit,sans-serif; font-size:1rem; letter-spacing:0; line-height:1.35; }
+    .faq details { border-bottom:1px solid var(--line); padding:8px 0; }
+    .faq summary { cursor:pointer; font-size:1.08rem; font-weight:600; padding:14px 0; }
+    .faq p { margin-top:0; color:var(--stone); max-width:46rem; }
+    .contact-box { border:1px solid var(--line); border-radius:12px; padding:48px; background:var(--ivory); }
+    footer { background:var(--ink); color:var(--ivory); padding:64px 0 28px; }
+    footer a { color:inherit; text-decoration:none; }
+    .fgrid { display:grid; grid-template-columns:1.2fr 1fr 1fr 1fr; gap:28px; }
+    .muted { color:var(--muted); }
+    .legal-links { display:flex; flex-wrap:wrap; gap:16px; border-top:1px solid rgba(255,255,255,.15); margin-top:36px; padding-top:16px; justify-content:space-between; }
+    .page { display:none; padding:64px 0 90px; }
+    .page.show { display:block; }
+    .page h1 { max-width:16ch; }
+    .warn { background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:16px 18px; }
+    .miss { display:inline-block; border:1px dashed #C4B6A4; background:var(--paper); border-radius:4px; padding:0 6px; }
+    dialog { border:0; border-radius:12px; padding:22px; max-width:440px; background:var(--ivory); box-shadow:0 20px 60px rgba(0,0,0,.2); }
+    dialog::backdrop { background:rgba(23,23,23,.35); }
+    :focus-visible { outline:2px solid var(--ink); outline-offset:3px; }
+    @media (max-width:900px) {
+      nav.desk,.desk-cta { display:none; }
+      .burger { display:inline-grid; place-items:center; }
+      .hero-grid,.cards,.offers,.steps,.jobs,.fgrid { grid-template-columns:1fr; }
+      .jobs { grid-template-columns:1fr 1fr; }
+      .contact-box { padding:28px 20px; }
+      .win.front { margin-top:-40px; }
+    }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+  </style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#accueil"><span class="mark" id="mark">S</span><span id="brand">Studio Digital</span></a>
+    <nav class="desk" aria-label="Navigation principale">
+      <a href="#accueil">Accueil</a>
+      <a href="#services">Services</a>
+      <a href="#offres">Nos offres</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="btn desk-cta" data-wa="quote">Demander un devis</button>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">☰</button>
+  </div>
+  <div class="wrap" id="menu">
+    <a href="#accueil">Accueil</a>
+    <a href="#services">Services</a>
+    <a href="#offres">Nos offres</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+    <button data-wa="quote">Demander un devis</button>
+  </div>
+</header>
+<main id="contenu">
+  <section class="hero" id="accueil">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="kicker">Sites vitrines pour professionnels</p>
+        <h1>Votre site internet professionnel, <em>sans complications.</em></h1>
+        <p class="lead">Nous créons des sites internet modernes, élégants et adaptés à votre activité pour vous aider à développer votre présence en ligne et inspirer confiance à vos futurs clients.</p>
+        <div class="actions">
+          <a class="btn ghost" href="#offres">Découvrir nos offres</a>
+          <button class="btn" data-wa="project">Parler de mon projet</button>
+        </div>
+        <p class="fine">Sites vitrines professionnels · Design sur mesure · Sans paiement en ligne</p>
+      </div>
+      <figure class="mock">
+        <div class="win back" aria-hidden="true">
+          <div class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i><span>Structure</span></div>
+          <p class="display" style="font-size:1.6rem">Pages du site</p>
+          <p>01 Accueil<br>02 Services<br>03 À propos<br>04 Contact</p>
+        </div>
+        <div class="win front" aria-hidden="true">
+          <div class="dots"><i class="dot" style="background:#171717"></i><i class="dot"></i><i class="dot"></i><span class="url">votre-activite.fr</span></div>
+          <p class="display" style="font-size:2rem;max-width:12ch">Un site clair, à votre image.</p>
+          <div class="lines"><span></span><span style="width:80%"></span><span class="btn" style="min-height:32px;margin-top:10px">Écrire</span></div>
+        </div>
+        <figcaption>Maquette illustrative d’une page vitrine. Ce n’est pas une réalisation client.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <p class="kicker">Services</p>
+      <h2>Une présence en ligne à la hauteur de votre activité.</h2>
+      <p class="intro stone">Que vous lanciez votre entreprise ou que vous souhaitiez moderniser votre image, nous créons un site internet adapté à vos objectifs, à votre activité et à vos clients.</p>
+      <div class="cards">
+        <article class="card"><h3>Design professionnel</h3><p class="stone">Un site esthétique, cohérent avec votre image de marque et agréable à consulter sur tous les écrans.</p></article>
+        <article class="card"><h3>Adapté au mobile</h3><p class="stone">Une expérience fluide sur smartphone, tablette et ordinateur.</p></article>
+        <article class="card"><h3>Contact simplifié</h3><p class="stone">Des boutons cliquables permettant à vos clients de vous contacter rapidement sur WhatsApp, Instagram, Telegram, par téléphone ou par e-mail selon vos besoins.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="paper" id="offres">
+    <div class="wrap">
+      <p class="kicker">Tarifs</p>
+      <h2>Nos offres</h2>
+      <p class="intro">Deux formules de site vitrine, sans boutique et sans paiement en ligne. Les prestations de chaque offre sont détaillées ci-dessous.</p>
+      <div class="offers" id="offer-cards"></div>
+      <div id="comparatif" style="margin-top:64px">
+        <h3 class="display" style="font-size:2.2rem">Comparer les deux offres</h3>
+        <p class="fine">Sur téléphone, faites défiler le tableau horizontalement.</p>
+        <div class="scroll">
+          <table>
+            <caption class="skip">Comparatif Essentiel 700 euros et Premium 1 200 euros</caption>
+            <thead><tr><th>Prestation</th><th>Essentiel<br><span class="stone">700&nbsp;€</span></th><th>Premium<br><span class="stone">1&nbsp;200&nbsp;€</span></th></tr></thead>
+            <tbody id="compare"></tbody>
+          </table>
+        </div>
+        <p>Les prestations exactes sont confirmées avant le démarrage. Toute demande dépassant le périmètre convenu peut faire l’objet d’un devis complémentaire.</p>
+        <p>Les prix sont indiqués en euros. Le régime de TVA applicable sera précisé sur le devis.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="methode">
+    <div class="wrap">
+      <p class="kicker">Méthode</p>
+      <h2>Votre site internet en 4 étapes.</h2>
+      <p class="intro stone">Le calendrier est confirmé en fonction du projet et de la réception des contenus. Aucun délai fixe n’est annoncé avant cet échange.</p>
+      <div class="steps">
+        <article><p class="num">01</p><h3>Échange</h3><p class="stone">Vous me contactez sur WhatsApp pour me présenter votre activité et vos besoins.</p></article>
+        <article><p class="num">02</p><h3>Cadrage du projet</h3><p class="stone">Nous choisissons l’offre adaptée, définissons les pages et réunissons les éléments nécessaires.</p></article>
+        <article><p class="num">03</p><h3>Création</h3><p class="stone">Je conçois votre site et vous présente une première version pour recueillir vos retours.</p></article>
+        <article><p class="num">04</p><h3>Livraison</h3><p class="stone">Après les corrections convenues, le site est testé puis mis en ligne lorsque les accès et éléments nécessaires sont disponibles.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="paper" id="metiers">
+    <div class="wrap">
+      <p class="kicker">Activités</p>
+      <h2>Un site adapté à votre métier.</h2>
+      <p class="intro">Les exemples sont illustratifs. Le projet est adapté à chaque activité, à ses clients et à ses objectifs.</p>
+      <div class="jobs">
+        <div class="tile">Artisans et professionnels du bâtiment</div>
+        <div class="tile">Restaurants et commerces</div>
+        <div class="tile">Coiffeurs et instituts de beauté</div>
+        <div class="tile">Coachs et consultants</div>
+        <div class="tile">Agents immobiliers</div>
+        <div class="tile">Indépendants et freelances</div>
+        <div class="tile">Entreprises de services</div>
+        <div class="tile">Associations et autres organisations</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap faq">
+      <p class="kicker">Questions</p>
+      <h2>FAQ</h2>
+      <details open><summary>Quelle est la différence entre les deux offres ?</summary><p>L’offre à 700 € convient aux professionnels qui souhaitent un site vitrine efficace de 5 pages maximum. L’offre à 1 200 € prévoit un site plus complet, jusqu’à 10 pages, avec davantage de personnalisation, les pages légales nécessaires et des vérifications plus approfondies.</p></details>
+      <details><summary>Puis-je recevoir des paiements sur mon site ?</summary><p>Les deux offres concernent exclusivement des sites vitrines. Aucun système de paiement en ligne ni boutique e-commerce n’est inclus.</p></details>
+      <details><summary>Le site sera-t-il adapté aux téléphones ?</summary><p>Oui, les deux offres comprennent une adaptation aux smartphones, tablettes et ordinateurs.</p></details>
+      <details><summary>Puis-je ajouter WhatsApp et Instagram ?</summary><p>Oui, les boutons de contact et les liens vers vos réseaux sociaux peuvent être intégrés selon vos besoins.</p></details>
+      <details><summary>Le nom de domaine et l’hébergement sont-ils inclus ?</summary><p>La mise en ligne est incluse dans les prestations décrites. L’achat du nom de domaine, l’hébergement et les éventuels abonnements de services tiers ne sont pas inclus dans le prix, sauf accord écrit contraire.</p></details>
+      <details><summary>Qui fournit les textes et les images ?</summary><p>Vous fournissez les informations relatives à votre activité, vos coordonnées, votre logo et les images que vous souhaitez utiliser. Les modalités de création ou de rédaction de contenus supplémentaires seront définies avant le démarrage.</p></details>
+      <details><summary>Combien de temps faut-il pour créer mon site ?</summary><p>Le délai dépend du nombre de pages, de la complexité du projet et de la réception des contenus. Un calendrier sera convenu avant le début de la création.</p></details>
+      <details><summary>Puis-je demander des modifications ?</summary><p>Une série de corrections est prévue après la présentation de la première version pour chacune des deux offres. Les modifications supplémentaires ou les changements importants de périmètre peuvent faire l’objet d’un devis complémentaire.</p></details>
+      <details><summary>Comment démarrer mon projet ?</summary><p>Il suffit de me contacter sur WhatsApp. Nous discuterons de votre activité, de vos besoins et de l’offre adaptée à votre projet.</p></details>
+    </div>
+  </section>
+
+  <section class="paper" id="contact">
+    <div class="wrap">
+      <div class="contact-box">
+        <p class="kicker">Contact</p>
+        <h2>Parlons de votre projet.</h2>
+        <p class="intro">Vous avez besoin d’un site internet professionnel ? Contactez-moi directement sur WhatsApp pour présenter votre projet et recevoir une réponse personnalisée.</p>
+        <div class="actions">
+          <button class="btn" data-wa="contact">Me contacter sur WhatsApp</button>
+          <button class="btn ghost" data-wa="essentiel">Site Vitrine Essentiel — 700&nbsp;€</button>
+          <button class="btn ghost" data-wa="premium">Site Vitrine Premium — 1&nbsp;200&nbsp;€</button>
+        </div>
+        <p id="socials"></p>
+        <p id="wa-status" role="status"></p>
+      </div>
+    </div>
+  </section>
+
+  <article class="page wrap" id="mentions"></article>
+  <article class="page wrap" id="privacy"></article>
+  <article class="page wrap" id="cookies"></article>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div><p class="display" style="font-size:1.8rem" id="foot-name">Studio Digital</p><p class="muted">Création de sites vitrines professionnels pour entreprises et indépendants.</p></div>
+      <div><p class="muted kicker">Navigation</p><p><a href="#accueil">Accueil</a><br><a href="#services">Services</a><br><a href="#offres">Nos offres</a><br><a href="#faq">FAQ</a><br><a href="#contact">Contact</a></p></div>
+      <div><p class="muted kicker">Offres</p><p><a href="#offres">Site Vitrine Essentiel — 700&nbsp;€</a><br><a href="#offres">Site Vitrine Premium — 1&nbsp;200&nbsp;€</a></p></div>
+      <div><p class="muted kicker">Contact</p><button class="btn light" data-wa="contact">WhatsApp</button><div id="foot-extra"></div></div>
+    </div>
+    <div class="legal-links">
+      <span>© <span id="year"></span> <span id="copy-name">Studio Digital</span></span>
+      <span><a href="#mentions" data-page="mentions">Mentions légales</a> · <a href="#privacy" data-page="privacy">Politique de confidentialité</a> · <a href="#cookies" data-page="cookies">Gestion des cookies</a></span>
+    </div>
+  </div>
+</footer>
+<dialog id="dlg">
+  <h2 class="display" style="font-size:1.5rem;margin-top:0">Contact WhatsApp indisponible</h2>
+  <p>Le numéro WhatsApp n’est pas encore configuré. Dans le fichier, cherchez <strong>whatsappNumber</strong> et mettez votre numéro international sans le signe +. Exemple : 33612345678.</p>
+  <button class="btn" id="dlg-close">Fermer</button>
+</dialog>
+<script>
+/* =========================================================
+   A MODIFIER AVANT LA MISE EN LIGNE
+   Laissez "" si l'information n'existe pas encore.
+   ========================================================= */
+const CONFIG = {
+  name: "Studio Digital",
+  whatsappNumber: "",
+  email: "",
+  instagramUrl: "",
+  telegramUrl: "",
+  siteUrl: "",
+  legal: {
+    editorName: "",
+    legalStatus: "",
+    address: "",
+    siret: "",
+    rcs: "",
+    vatNumber: "",
+    publicationDirector: "",
+    phone: "",
+    hostName: "",
+    hostAddress: "",
+    hostWebsite: ""
+  }
+};
+
+const MESSAGES = {
+  quote: "Bonjour, je souhaite demander un devis pour la création d'un site internet.",
+  project: "Bonjour, j'aimerais parler de mon projet de site internet.",
+  contact: "Bonjour, je souhaite échanger au sujet de la création d'un site internet.",
+  essentiel: "Bonjour, je suis intéressé par l'offre Site Vitrine Essentiel à 700 €. J'aimerais discuter de mon projet.",
+  premium: "Bonjour, je suis intéressé par l'offre Site Vitrine Premium à 1 200 €. J'aimerais discuter de mon projet."
+};
+
+const OFFERS = [
+  {
+    key: "essentiel",
+    eyebrow: "Offre 01",
+    name: "Site Vitrine Essentiel",
+    price: "700\u00A0€",
+    hook: "L’essentiel pour présenter votre activité avec professionnalisme.",
+    description: "Un site vitrine moderne pour présenter vos services, rassurer vos visiteurs et faciliter les prises de contact.",
+    features: [
+      "Création d’un site vitrine professionnel.",
+      "Jusqu’à 5 pages, par exemple : Accueil, Services, À propos, Réalisations et Contact.",
+      "Design moderne adapté à votre activité.",
+      "Adaptation aux smartphones, tablettes et ordinateurs.",
+      "Navigation claire et intuitive.",
+      "Présentation de vos services et de vos coordonnées.",
+      "Boutons cliquables vers WhatsApp, Instagram, Telegram et autres réseaux sociaux selon vos besoins.",
+      "Liens cliquables pour appeler ou envoyer un e-mail.",
+      "Formulaire de contact simple si nécessaire, sans paiement en ligne.",
+      "Optimisation SEO de base : titres, descriptions, structure des pages et balises essentielles.",
+      "Optimisation des images et bonnes pratiques de performance.",
+      "Favicon et éléments visuels de base.",
+      "Intégration de vos textes, images, logo et coordonnées fournis.",
+      "Mise en ligne du site, sous réserve de disposer des accès et éléments nécessaires.",
+      "Une série de corrections après présentation de la première version.",
+      "Assistance à la mise en ligne."
+    ],
+    exclusion: "Aucun système de paiement en ligne ni boutique e-commerce n’est inclus.",
+    button: "Choisir l’offre à 700\u00A0€"
+  },
+  {
+    key: "premium",
+    eyebrow: "Offre 02",
+    badge: "Offre complète",
+    name: "Site Vitrine Premium",
+    price: "1\u00A0200\u00A0€",
+    hook: "Un site complet, soigné et prêt à accueillir vos futurs clients.",
+    description: "Une solution plus complète pour les professionnels qui veulent un site internet travaillé, structuré et prêt à être utilisé au quotidien.",
+    features: [
+      "Création d’un site vitrine premium sur mesure.",
+      "Jusqu’à 10 pages, selon les besoins du projet.",
+      "Design personnalisé et cohérent avec votre identité visuelle.",
+      "Adaptation complète aux smartphones, tablettes et ordinateurs.",
+      "Architecture et navigation personnalisées.",
+      "Pages de présentation de l’entreprise, services, équipe, réalisations, contact et autres contenus pertinents.",
+      "Boutons WhatsApp, Instagram, Telegram, téléphone, e-mail et autres liens utiles.",
+      "Formulaire de contact fonctionnel.",
+      "Intégration de cartes, galeries d’images, portfolio ou FAQ si nécessaire.",
+      "Optimisation SEO de base sur les pages livrées.",
+      "Configuration des titres, descriptions, URLs et balises essentielles.",
+      "Optimisation des images et des performances.",
+      "Favicon, page 404 personnalisée et éléments de finition.",
+      "Configuration du nom de domaine si le client dispose des accès nécessaires.",
+      "Mise en ligne et vérifications avant livraison.",
+      "Création ou intégration des pages légales nécessaires, notamment les mentions légales, la politique de confidentialité et la gestion des cookies si applicable.",
+      "Ajout des informations de l’entreprise dans les pages légales à partir des renseignements fournis par le client.",
+      "Vérification des liens, boutons, formulaires et affichage mobile.",
+      "Tests fonctionnels avant livraison.",
+      "Une série de corrections après présentation de la première version.",
+      "Livraison du site prêt à être utilisé.",
+      "Assistance à la mise en ligne et prise en main des fonctions essentielles."
+    ],
+    exclusion: "Cette offre ne comprend pas de boutique en ligne ni de système de paiement. Les contenus et informations légales propres à l’entreprise doivent être fournis ou validés par le client.",
+    button: "Choisir l’offre à 1\u00A0200\u00A0€"
+  }
+];
+
+const COMPARE = [
+  ["Nombre de pages", "Jusqu’à 5", "Jusqu’à 10"],
+  ["Design", "Professionnel", "Personnalisé premium"],
+  ["Responsive mobile", "Inclus", "Inclus"],
+  ["Liens vers les réseaux sociaux", "Inclus", "Inclus"],
+  ["Formulaire de contact", "Simple selon les besoins", "Fonctionnel"],
+  ["SEO de base", "Inclus", "Inclus"],
+  ["Pages légales", "Non incluses dans l’offre standard", "Intégration des pages nécessaires"],
+  ["Tests avant livraison", "Essentiels", "Complets"],
+  ["Mise en ligne", "Incluse", "Incluse"],
+  ["Corrections après présentation", "Une série", "Une série"],
+  ["Paiement en ligne", "Non inclus", "Non inclus"]
+];
+
+function waHref(message) {
+  const digits = String(CONFIG.whatsappNumber || "").replace(/\D/g, "").replace(/^00/, "");
+  if (digits.length < 8 || digits.length > 15) return "";
+  return "https://wa.me/" + digits + "?text=" + encodeURIComponent(message);
+}
+function field(value, label) {
+  const v = String(value || "").trim();
+  return v ? "<strong>" + v + "</strong>" : "<span class='miss'>À compléter — " + label + "</span>";
+}
+function openWa(key) {
+  const href = waHref(MESSAGES[key]);
+  if (!href) { document.getElementById("dlg").showModal(); return; }
+  window.open(href, "_blank", "noopener");
+}
+function showPage(id) {
+  document.querySelectorAll("main > section").forEach((s) => { s.hidden = !!id; });
+  document.querySelectorAll(".page").forEach((p) => p.classList.toggle("show", p.id === id));
+  if (id) window.scrollTo(0, 0);
+}
+function bindWa(root) {
+  root.querySelectorAll("[data-wa]").forEach((el) => {
+    el.addEventListener("click", (e) => { e.preventDefault(); openWa(el.getAttribute("data-wa")); });
+  });
+}
+
+document.getElementById("brand").textContent = CONFIG.name;
+document.getElementById("mark").textContent = (CONFIG.name || "S").trim().charAt(0).toUpperCase();
+document.getElementById("foot-name").textContent = CONFIG.name;
+document.getElementById("copy-name").textContent = CONFIG.name;
+document.getElementById("year").textContent = new Date().getFullYear();
+document.title = CONFIG.name + " — Sites internet professionnels";
+
+document.getElementById("offer-cards").innerHTML = OFFERS.map((o) => `
+  <article class="offer ${o.key === "premium" ? "premium" : ""}">
+    <div class="top"><span class="kicker stone">${o.eyebrow}</span>${o.badge ? `<span class="badge">${o.badge}</span>` : ""}</div>
+    <h3>${o.name}</h3>
+    <p class="price display">${o.price}</p>
+    <p class="stone">Prix de la prestation</p>
+    <p><strong>${o.hook}</strong></p>
+    <p class="stone">${o.description}</p>
+    <ul>${o.features.map((f) => `<li><span aria-hidden="true">✓</span><span>${f}</span></li>`).join("")}</ul>
+    <p class="note">${o.exclusion}</p>
+    <button class="btn wide" data-wa="${o.key}" style="margin-top:18px">${o.button}</button>
+  </article>`).join("");
+
+document.getElementById("compare").innerHTML = COMPARE.map((r) => `<tr><th scope="row">${r[0]}</th><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("");
+
+const social = [];
+if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(CONFIG.email || "")) social.push(`<a href="mailto:${CONFIG.email}">${CONFIG.email}</a>`);
+if (/^https?:\/\//.test(CONFIG.instagramUrl || "")) social.push(`<a href="${CONFIG.instagramUrl}" target="_blank" rel="noopener">Instagram</a>`);
+if (/^https?:\/\//.test(CONFIG.telegramUrl || "")) social.push(`<a href="${CONFIG.telegramUrl}" target="_blank" rel="noopener">Telegram</a>`);
+document.getElementById("socials").innerHTML = social.join(" · ");
+document.getElementById("foot-extra").innerHTML = social.length ? "<p>" + social.join("<br>") + "</p>" : "";
+document.getElementById("wa-status").textContent = waHref("Bonjour") ? "" : "Le numéro WhatsApp n’est pas encore renseigné. Modifiez whatsappNumber dans ce fichier, puis remettez-le sur GitHub.";
+
+const L = CONFIG.legal;
+document.getElementById("mentions").innerHTML = `
+  <p class="kicker">Informations légales</p><h1>Mentions légales</h1>
+  <div class="warn"><p><strong>Avant la mise en ligne.</strong> Ce texte est une base à compléter. Il ne constitue pas un avis juridique.</p></div>
+  <h2>Éditeur</h2>
+  <p>Le site ${CONFIG.name} est édité par ${field(L.editorName, "nom de l’éditeur")}.</p>
+  <p>Statut : ${field(L.legalStatus, "forme juridique")}. Adresse : ${field(L.address, "adresse")}. SIRET : ${field(L.siret, "SIRET")}. RCS : ${field(L.rcs, "RCS si applicable")}. TVA : ${field(L.vatNumber, "TVA si applicable")}.</p>
+  <p>Directeur de la publication : ${field(L.publicationDirector, "nom")}. E-mail : ${field(CONFIG.email, "e-mail")}. Téléphone : ${field(L.phone, "téléphone si vous souhaitez le publier")}.</p>
+  <h2>Hébergement</h2>
+  <p>Hébergeur : ${field(L.hostName, "nom")} , ${field(L.hostAddress, "adresse")}. Site : ${field(L.hostWebsite, "URL")}.</p>
+  <h2>Activité</h2>
+  <p>Les offres décrites sont des sites vitrines. Elles ne comprennent ni boutique ni paiement en ligne. Le nom de domaine, l’hébergement et les abonnements tiers ne sont pas inclus, sauf accord écrit contraire.</p>
+  <p><a href="#accueil" id="back-home">Retour à l’accueil</a></p>`;
+document.getElementById("privacy").innerHTML = `
+  <p class="kicker">Informations légales</p><h1>Politique de confidentialité</h1>
+  <div class="warn"><p>Base à adapter à la situation réelle. Ce texte n’est pas un avis juridique.</p></div>
+  <p>Responsable : ${field(L.editorName, "nom")} , ${field(L.address, "adresse")}. Contact : ${field(CONFIG.email, "e-mail")}.</p>
+  <p>Ce site ne crée pas de compte et n’encaisse pas de paiement. Il n’y a pas de formulaire. Un clic vers WhatsApp ouvre l’application WhatsApp : les données saisies là-bas sont traitées par ce service. L’hébergeur peut conserver des journaux techniques de sécurité.</p>
+  <p>Vous pouvez demander l’accès, la rectification ou l’effacement de vos données, et saisir la CNIL. <a href="#accueil">Retour à l’accueil</a></p>`;
+document.getElementById("cookies").innerHTML = `
+  <p class="kicker">Informations légales</p><h1>Gestion des cookies</h1>
+  <div class="warn"><p>Aucun cookie de mesure d’audience ou publicitaire n’est déposé par cette page. Pas de bannière tant qu’aucun traceur non essentiel n’est ajouté.</p></div>
+  <p>Un clic vers WhatsApp, Instagram ou Telegram quitte ce site. Ces services peuvent alors déposer leurs propres cookies. Si vous ajoutez plus tard un outil de statistique, cette page et un recueil de consentement devront être mis à jour.</p>
+  <p><a href="#accueil">Retour à l’accueil</a></p>`;
+
+bindWa(document);
+document.getElementById("burger").addEventListener("click", () => {
+  const menu = document.getElementById("menu");
+  const open = menu.style.display !== "block";
+  menu.style.display = open ? "block" : "none";
+  document.getElementById("burger").setAttribute("aria-expanded", open ? "true" : "false");
+});
+document.querySelectorAll("a[href^='#']").forEach((a) => {
+  if (a.hasAttribute("data-page")) return;
+  a.addEventListener("click", () => {
+    document.getElementById("menu").style.display = "none";
+    document.getElementById("burger").setAttribute("aria-expanded", "false");
+    showPage("");
+  });
+});
+document.querySelectorAll("[data-page]").forEach((a) => a.addEventListener("click", (e) => {
+  e.preventDefault();
+  document.getElementById("menu").style.display = "none";
+  showPage(a.getAttribute("data-page"));
+}));
+document.getElementById("dlg-close").addEventListener("click", () => document.getElementById("dlg").close());
+</script>
+</body>
+</html>
